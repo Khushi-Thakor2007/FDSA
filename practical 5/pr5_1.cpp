@@ -3,14 +3,14 @@
 using namespace std;
 struct Node // create the node of the linked list
 {
-    string song;
-    Node* prev;
-    Node* next;
+    string song; //stroes the song name
+    Node* prev; // stores the address of previous node
+    Node* next; // stores the address of next node
 };
 void addBeginning(Node*& head,string song) // add the song at the biginning of the linked list
 {
-    Node* newNode=new Node();
-    newNode->song=song;
+    Node* newNode=new Node();//dynamicaly create the new node
+    newNode->song=song; // stores the song name
     newNode->prev=nullptr;
     newNode->next=head;
 
