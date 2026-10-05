@@ -2,78 +2,77 @@
 #include<string> 
 using namespace std;
 
-struct Node // Represents one browser history page
+struct Node
 {
-    string page; // Stores the page name
-    Node* next; // Points to the previous page
+    string page;
+    Node* next;
 
-    Node(string p) // Constructor to create a new node
+    Node(string p)
     {
-        page=p; // Stores the page name
-        next=NULL; // Initially points to no page
+        page=p;
+        next=NULL;
     }
 };
 
-class Browser // Defines the browser history stack
+class Browser
 {
-    Node* top; // Points to the current page
+    Node* top;
 
 public:
-    Browser() // Constructor initializes empty history
+    Browser()
     {
-        top=NULL; // NULL means no page exists
+        top=NULL;
     }
 
-    void visit(string page) // Adds a newly visited page
+    void visit(string page)
     {
-        Node* newNode=new Node(page); // Creates a new node
-        newNode->next=top; // Links it to the previous page
-        top=newNode; // Makes the new page the current page
-        cout<<"Current page: "<<top->page<<endl; // Prints current page
+        Node* newNode=new Node(page);
+        newNode->next=top;
+        top=newNode;
+        cout<<"Current page: "<<top->page<<endl;
     }
 
-    void back() // Returns to the previous page
+    void back()
     {
-        if(top==NULL) // Checks whether history is empty
+        if(top==NULL)
         {
-            cout<<"Error: No history available"<<endl; // Prints error
-            return; // Stops the back operation
+            cout<<"Error: No history available"<<endl;
+            return;
         }
 
-        Node* temp=top; // Stores the current page temporarily
-        top=top->next; // Moves to the previous page
+        Node* temp=top;
+        top=top->next;
 
-        if(top==NULL) // Checks whether any page remains
-            cout<<"No page open"<<endl; // Prints if history is empty
+        if(top==NULL)
+            cout<<"No page open"<<endl;
         else
-            cout<<"Current page: "<<top->page<<endl; // Prints current page
+            cout<<"Current page: "<<top->page<<endl;
 
-        delete temp; // Frees memory of the removed page
+        delete temp;
     }
 };
 
 int main() 
 {
-    Browser b; // Creates a browser history stack
-    int n; // Stores the number of operations
-    cin>>n; // Reads the number of operations
+    Browser b;
+    int n;
+    cin>>n;
 
-    while(n--) // Repeats for all operations
+    while(n--)
     {
-        string operation; // Stores the operation type
-        cin>>operation; // Reads the operation
+        string operation;
+        cin>>operation;
 
-        if(operation=="visit") // Checks for a visit operation
+        if(operation=="visit")
         {
-            string page; // Stores the page name
-            cin>>page; // Reads the page name
-            b.visit(page); // Adds the page to history
+            string page;
+            cin>>page;
+            b.visit(page);
         }
-        else if(operation=="back") // Checks for a back operation
+        else if(operation=="back")
         {
-            b.back(); // Goes to the previous page
+            b.back();
         }
     }
-
     return 0;
 }

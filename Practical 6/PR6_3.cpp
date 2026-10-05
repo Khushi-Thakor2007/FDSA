@@ -3,76 +3,76 @@
 #include<string>
 using namespace std; 
 
-int precedence(char op) // Returns the priority of an operator
+int precedence(char op)
 {
-    if(op=='+'||op=='-') // Checks for addition or subtraction
-        return 1; // Gives lower precedence
+    if(op=='+'||op=='-')
+        return 1;
 
-    if(op=='*'||op=='/') // Checks for multiplication or division
-        return 2; // Gives higher precedence
+    if(op=='*'||op=='/')
+        return 2;
 
-    if(op=='^') // Checks for exponentiation
-        return 3; // Gives highest precedence
+    if(op=='^')
+        return 3;
 
-    return 0; // Returns zero for brackets or unknown characters
+    return 0;
 }
 
-string infixToPostfix(string infix) // Converts infix expression to postfix
+string infixToPostfix(string infix)
 {
-    stack<char> s; // Creates a stack to store operators
-    string postfix=""; // Stores the final postfix expression
+    stack<char> s;
+    string postfix="";
 
-    for(char ch:infix) // Processes every character of the expression
+    for(char ch:infix)
     {
-        if(ch==' ') // Checks for spaces
-            continue; // Ignores spaces
+        if(ch==' ')
+            continue;
 
-        if(isalnum(ch)) // Checks whether the character is a number or letter
+        if(isalnum(ch))
         {
-            postfix+=ch; // Directly adds the operand to postfix
+            postfix+=ch;
         }
-        else if(ch=='(') // Checks for an opening bracket
+        else if(ch=='(')
         {
-            s.push(ch); // Pushes opening bracket onto the stack
+            s.push(ch);
         }
-        else if(ch==')') // Checks for a closing bracket
+        else if(ch==')')
         {
-            while(!s.empty()&&s.top()!='(') // Removes operators until opening bracket
+            while(!s.empty()&&s.top()!='(')
             {
-                postfix+=s.top(); // Adds the top operator to postfix
-                s.pop(); // Removes that operator from the stack
+                postfix+=s.top();
+                s.pop();
             }
 
-            if(!s.empty()&&s.top()=='(') // Checks whether opening bracket exists
-                s.pop(); // Removes the opening bracket from the stack
+            if(!s.empty()&&s.top()=='(')
+                s.pop();
         }
-        else // Handles arithmetic operators
+        else
         {
-            while(!s.empty()&&s.top()!='('&&precedence(s.top())>=precedence(ch)) // Checks operator precedence
+            while(!s.empty()&&s.top()!='('&&precedence(s.top())>=precedence(ch))
             {
-                postfix+=s.top(); // Adds higher or equal precedence operator
-                s.pop(); // Removes that operator from the stack
+                postfix+=s.top();
+                s.pop();
             }
 
-            s.push(ch); // Pushes the current operator onto the stack
+            s.push(ch);
         }
     }
 
-    while(!s.empty()) // Processes remaining operators
+    while(!s.empty())
     {
-        postfix+=s.top(); // Adds the remaining operator to postfix
-        s.pop(); // Removes the operator from the stack
+        postfix+=s.top();
+        s.pop();
     }
 
-    return postfix; // Returns the converted postfix expression
+    return postfix;
 }
 
-int main() // Main function starts here
+int main()
 {
-    string infix; // Stores the input infix expression
-    getline(cin,infix); // Reads the complete expression including spaces
+    string infix;
+    getline(cin,infix);
 
-    cout<<"Postfix: "<<infixToPostfix(infix)<<endl; // Converts and prints postfix expression
+    cout<<"Postfix: "<<infixToPostfix(infix)<<endl;
 
     return 0;
 }

@@ -1,37 +1,37 @@
 #include<iostream>
 using namespace std; 
 
-#define MAX 100 //Defines maximum array capacity
+#define MAX 100
 
 class Stack
 {
-    int stack[MAX]; //Creates an array to store trays
-    int top; //Stores the index of the top tray
-    int capacity; //Stores the max capacity of the stack
+    int stack[MAX];
+    int top;
+    int capacity;
 
 public:
-    Stack(int n) //Constructor receives the stack capacity
+    Stack(int n)
     {
-        capacity=n; //Sets the capacity given by the user
-        top=-1; // Stack is empty
+        capacity=n;
+        top=-1;
     }
 
-    void push(int tray) //add a play to the top
+    void push(int tray)
     {
-        if(top==capacity-1) //Checks if the stack is full
+        if(top==capacity-1)
         {
             cout<<"Error: Stack is full"<<endl; 
             return; 
         }
 
         top++;
-        stack[top]=tray; //Adds the tray at the top
+        stack[top]=tray;
         cout<<"Top tray: "<<stack[top]<<endl;
     }
 
-    void pop() //remove the top tray
+    void pop()
     {
-        if(top==-1) //stack is empty
+        if(top==-1)
         {
             cout<<"Error: Stack is empty"<<endl;
             return; 
@@ -44,27 +44,27 @@ public:
 
 int main()
 {
-    int n; //max stack capacity
+    int n;
     cin>>n; 
 
-    Stack s(n); //Creates a stack with capacity n
+    Stack s(n);
 
-    int q; //the number of operations
+    int q;
     cin>>q;
 
-    for(int i=0;i<q;i++) //for operations
+    for(int i=0;i<q;i++)
     {
         char operation; 
         cin>>operation; 
-        if(operation=='P')//P=push/add 
+        if(operation=='P')
         {
-            int tray; //Stores the tray number
+            int tray;
             cin>>tray;
-            s.push(tray); //Adds new tray to the stack
+            s.push(tray);
         }
-        else if(operation=='T')//T=take
+        else if(operation=='T')
         {
-            s.pop(); //Removes the top tray
+            s.pop();
         }
     }
     return 0; 
